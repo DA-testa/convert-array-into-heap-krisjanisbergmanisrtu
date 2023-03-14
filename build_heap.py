@@ -44,7 +44,7 @@ def main():
 
         text = text.split('\n')
         n = int(text[0])
-        data = text[1].split(' ')
+        data = list(map(int, text[1].split()))
 
     elif "I" in text:
         # # input from keyboard
