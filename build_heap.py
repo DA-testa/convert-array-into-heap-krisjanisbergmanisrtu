@@ -34,7 +34,7 @@ def main():
     # add another input for I or F
     # first two tests are from keyboard, third test is from a file
     text = input()
-    text = "F"
+    # text = "F" # Test line
     if "F" in text:
         file_name = input()
 
