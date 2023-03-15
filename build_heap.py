@@ -52,13 +52,13 @@ def build_heap(data):
 def main():
     # add another input for I or F
     # first two tests are from keyboard, third test is from a file
-    # text = input()
-    text = "F"  # Test line
+    text = input()
+    # text = "F"  # Test line
     if "F" in text:
-        # file_name = input()
+        file_name = input()
 
-        # file = open("./tests/" + file_name, "r")
-        file = open("./tests/" + "04", "r")  # Test line
+        file = open("./tests/" + file_name, "r")
+        # file = open("./tests/" + "04", "r")  # Test line
         text = file.read()
 
         text = text.split('\n')
