@@ -53,12 +53,10 @@ def main():
     # add another input for I or F
     # first two tests are from keyboard, third test is from a file
     text = input()
-    # text = "F"  # Test line
     if "F" in text:
         file_name = input()
 
         file = open("./tests/" + file_name, "r")
-        # file = open("./tests/" + "04", "r")  # Test line
         text = file.read()
 
         text = text.split('\n')
@@ -83,10 +81,6 @@ def main():
     print(len(swaps))
     for i, j in swaps:
         print(i, j)
-    # print("----")
-    # for i, j in swaps_vals:
-    #     print(i, j)
-
 
 if __name__ == "__main__":
     main()
