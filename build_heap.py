@@ -1,13 +1,31 @@
 # python3
 import math
 
+swaps_vals = []
+
+
 def build_heap(data):
     swaps = []
+    n = len(data)
 
-    for i in range(len(data), math.floor(len(data) / 2), -1):
+    for i in range(n, (math.floor(n / 2) + 1), -1):
 
         root_reached = 0
-        target_index = i - 1
+
+        if n % 2 == 1:
+            right_child_index = left_child_index = i - 1
+        else:
+            right_child_index = i - 1
+            left_child_index = i - 2
+
+        left_child = data[left_child_index]
+        right_child = data[right_child_index]
+
+        if right_child < left_child:
+            target_index = right_child_index
+        else:
+            target_index = left_child_index
+
         parent_index = math.ceil(target_index / 2 - 1)
 
         while root_reached != 1:
@@ -19,6 +37,7 @@ def build_heap(data):
 
             if parent > target:
                 swaps.append([parent_index, target_index])
+                swaps_vals.append([parent, target])
                 data[target_index], data[parent_index] = parent, target
                 target_index = parent_index
                 parent_index = math.ceil(target_index / 2 - 1)
@@ -33,13 +52,13 @@ def build_heap(data):
 def main():
     # add another input for I or F
     # first two tests are from keyboard, third test is from a file
-    text = input()
-    # text = "F" # Test line
+    # text = input()
+    text = "F"  # Test line
     if "F" in text:
-        file_name = input()
+        # file_name = input()
 
-        file = open("./tests/" + file_name, "r")
-        # file = open("./tests/" + "01", "r") # Test line
+        # file = open("./tests/" + file_name, "r")
+        file = open("./tests/" + "04", "r")  # Test line
         text = file.read()
 
         text = text.split('\n')
@@ -64,6 +83,9 @@ def main():
     print(len(swaps))
     for i, j in swaps:
         print(i, j)
+    # print("----")
+    # for i, j in swaps_vals:
+    #     print(i, j)
 
 
 if __name__ == "__main__":
