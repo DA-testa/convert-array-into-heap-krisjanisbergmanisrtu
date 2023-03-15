@@ -1,25 +1,72 @@
 # python3
+import math
+
+swaps_vals = []
 
 
 def build_heap(data):
     swaps = []
-    # TODO: Creat heap and heap sort
-    # try to achieve  O(n) and not O(n2)
+    n = len(data)
 
+    for i in range(n, (math.floor(n / 2) + 1), -1):
+
+        root_reached = 0
+
+        if n % 2 == 1:
+            right_child_index = left_child_index = i - 1
+        else:
+            right_child_index = i - 1
+            left_child_index = i - 2
+
+        left_child = data[left_child_index]
+        right_child = data[right_child_index]
+
+        if right_child < left_child:
+            target_index = right_child_index
+        else:
+            target_index = left_child_index
+
+        parent_index = math.ceil(target_index / 2 - 1)
+
+        while root_reached != 1:
+            target = data[target_index]
+            parent = data[parent_index]
+
+            if parent_index == 0:
+                root_reached = 1
+
+            if parent > target:
+                swaps.append([parent_index, target_index])
+                swaps_vals.append([parent, target])
+                data[target_index], data[parent_index] = parent, target
+                target_index = parent_index
+                parent_index = math.ceil(target_index / 2 - 1)
+            else:
+                break
+
+    # try to achieve  O(n) and not O(n2)
 
     return swaps
 
 
 def main():
-    
-    # TODO : add input and corresponding checks
-    # add another input for I or F 
+    # add another input for I or F
     # first two tests are from keyboard, third test is from a file
+    text = input()
+    if "F" in text:
+        file_name = input()
 
+        file = open("./tests/" + file_name, "r")
+        text = file.read()
 
-    # input from keyboard
-    n = int(input())
-    data = list(map(int, input().split()))
+        text = text.split('\n')
+        n = int(text[0])
+        data = list(map(int, text[1].split()))
+
+    elif "I" in text:
+        # # input from keyboard
+        n = int(input())
+        data = list(map(int, input().split()))
 
     # checks if lenght of data is the same as the said lenght
     assert len(data) == n
@@ -28,15 +75,12 @@ def main():
     # and give back all swaps
     swaps = build_heap(data)
 
-    # TODO: output how many swaps were made, 
     # this number should be less than 4n (less than 4*len(data))
-
 
     # output all swaps
     print(len(swaps))
     for i, j in swaps:
         print(i, j)
-
 
 if __name__ == "__main__":
     main()
